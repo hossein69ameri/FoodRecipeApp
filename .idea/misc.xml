@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/drawable/bg_top_rounded_white.xml" value="0.176" />
         <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/drawable/ic_clock.xml" value="0.176" />
         <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_main.xml" value="0.30416666666666664" />
       </map>
