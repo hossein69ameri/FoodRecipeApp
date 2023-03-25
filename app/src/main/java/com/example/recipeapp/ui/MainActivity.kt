@@ -7,8 +7,10 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.recipeapp.R
 import com.example.recipeapp.databinding.ActivityMainBinding
 import com.example.recipeapp.util.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
     //binding
     private lateinit var binding: ActivityMainBinding

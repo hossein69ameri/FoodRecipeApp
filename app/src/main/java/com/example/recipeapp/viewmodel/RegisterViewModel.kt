@@ -13,15 +13,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(private val register: RegisterRepository) : ViewModel() {
+class RegisterViewModel @Inject constructor(private val repository : RegisterRepository) : ViewModel() {
 
-     val registerLiveData = MutableLiveData<NetworkRequest<ResponseRegister>>()
-
-    fun callRegisterApi(apikey:String,body: BodyRegister) = viewModelScope.launch {
-        registerLiveData.value = NetworkRequest.Loading()
-        val response = register.postRegister(apikey,body)
-        registerLiveData.value = NetworkResponse(response).generalNetworkResponse()
-
+    //Api
+    val registerData = MutableLiveData<NetworkRequest<ResponseRegister>>()
+    fun callRegisterApi(apiKey: String, body: BodyRegister) = viewModelScope.launch {
+        registerData.value = NetworkRequest.Loading()
+        val response = repository.postRegister(apiKey, body)
+        registerData.value = NetworkResponse(response).generalNetworkResponse()
     }
+    //data store
+    fun saveRegisterData(username : String,hash : String) = viewModelScope.launch { repository.saveRegisterData(username, hash) }
+    val readRegisterData = repository.readRegisterData
 
 }

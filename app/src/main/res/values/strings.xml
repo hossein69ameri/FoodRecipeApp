@@ -7,4 +7,7 @@
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="register">Register</string>
+    <string name="emailNotValid">Email Not Valid</string>
+    <string name="checkConnection">Check Internet Connection</string>
+    <string name="version">Version</string>
 </resources>
