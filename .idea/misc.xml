@@ -5,10 +5,15 @@
       <map>
         <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/drawable/bg_top_rounded_white.xml" value="0.176" />
         <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/drawable/ic_clock.xml" value="0.176" />
+        <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/drawable/item_bottom_nav_tint.xml" value="0.176" />
         <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/activity_main.xml" value="0.2740740740740741" />
+        <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/fragment_favorite.xml" value="0.32135416666666666" />
+        <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/fragment_lucky.xml" value="0.32135416666666666" />
         <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/fragment_recipe.xml" value="0.32135416666666666" />
         <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/fragment_register.xml" value="0.2740740740740741" />
+        <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/fragment_search.xml" value="0.32135416666666666" />
         <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/layout/fragment_splash.xml" value="0.32135416666666666" />
+        <entry key="..\:/Users/IDEHAL/AndroidStudioProjects/RecipeApp/app/src/main/res/menu/menu_main.xml" value="0.5146484375" />
       </map>
     </option>
   </component>
