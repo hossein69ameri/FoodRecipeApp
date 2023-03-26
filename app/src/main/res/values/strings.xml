@@ -15,4 +15,7 @@
     <string name="lucky">Lucky</string>
     <string name="favorite">Favorite</string>
     <string name="vegan">Vegan</string>
+    <string name="headerInfo">What do you want to eat today?</string>
+    <string name="recent_recipes">Recent recipes</string>
+    <string name="hello">Hello</string>
 </resources>
