@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!--Card-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardLay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_160mdp"
+        android:layout_marginHorizontal="@dimen/_4mdp"
+        android:layout_marginTop="@dimen/_5mdp"
+        app:cardCornerRadius="@dimen/_8mdp"
+        app:cardElevation="@dimen/_3mdp"
+        app:layout_constraintTop_toTopOf="parent">
+        <!--Image-->
+        <ImageView
+            android:id="@+id/popularImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/avatars" />
+        <!--Shadow-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.9"
+            android:background="@drawable/bg_shadow_dark" />
+
+    </com.google.android.material.card.MaterialCardView>
+    <!--Info-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_35mdp"
+        android:layout_marginHorizontal="@dimen/_20mdp"
+        android:layout_marginBottom="@dimen/_10mdp"
+        android:background="@drawable/bg_rounded_white"
+        android:elevation="@dimen/_4mdp"
+        app:layout_constraintBottom_toBottomOf="@id/cardLay"
+        app:layout_constraintEnd_toEndOf="@id/cardLay"
+        app:layout_constraintStart_toStartOf="@id/cardLay"
+        app:layout_constraintTop_toBottomOf="@id/cardLay">
+        <!--Name-->
+        <TextView
+            android:id="@+id/popularNameTxt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_10mdp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textColor="@color/jacarta"
+            android:textSize="@dimen/_10font_mdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/popularPriceTxt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Show recipe name" />
+        <!--Price-->
+        <TextView
+            android:id="@+id/popularPriceTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10mdp"
+            android:drawablePadding="@dimen/_3mdp"
+            android:gravity="center"
+            android:textColor="@color/jacarta"
+            android:textSize="@dimen/_9font_mdp"
+            app:drawableStartCompat="@drawable/ic_coins"
+            app:drawableTint="@color/chineseYellow"
+            app:fontPath="fonts/atlas_bold.ttf"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="125$" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

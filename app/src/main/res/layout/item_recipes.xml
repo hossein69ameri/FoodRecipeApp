@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/_15mdp"
+    android:layout_marginVertical="@dimen/_5mdp"
+    android:background="@drawable/bg_rounded_white"
+    android:elevation="@dimen/_2mdp">
+    <!--Card-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/recipeImageCard"
+        android:layout_width="@dimen/_100mdp"
+        android:layout_height="@dimen/_100mdp"
+        android:layout_margin="@dimen/_8mdp"
+        app:cardCornerRadius="@dimen/_8mdp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!--Image-->
+        <ImageView
+            android:id="@+id/recipeImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/avatars" />
+        <!--Shadow-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.6"
+            android:background="@drawable/bg_shadow_dark" />
+
+    </com.google.android.material.card.MaterialCardView>
+    <!--Name-->
+    <TextView
+        android:id="@+id/recipeNameTxt"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_30mdp"
+        android:layout_marginHorizontal="@dimen/_8mdp"
+        android:ellipsize="end"
+        android:lineSpacingExtra="@dimen/_2mdp"
+        android:maxLines="2"
+        android:textColor="@color/jacarta"
+        android:textSize="@dimen/_10font_mdp"
+        app:fontPath="fonts/atlas_bold.ttf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/recipeImageCard"
+        app:layout_constraintTop_toTopOf="@id/recipeImageCard" />
+    <!--Desc-->
+    <TextView
+        android:id="@+id/recipeDescTxt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/_5mdp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="@dimen/_5mdp"
+        android:maxLines="2"
+        android:textColor="@color/dolphinGray"
+        android:textColorLink="@color/dolphinGray"
+        android:textSize="@dimen/_8font_mdp"
+        app:layout_constraintBottom_toTopOf="@id/recipeInfoLay"
+        app:layout_constraintEnd_toEndOf="@id/recipeNameTxt"
+        app:layout_constraintStart_toStartOf="@+id/recipeNameTxt"
+        app:layout_constraintTop_toBottomOf="@id/recipeNameTxt" />
+    <!--Info-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/recipeInfoLay"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_35mdp"
+        app:layout_constraintBottom_toBottomOf="@id/recipeImageCard"
+        app:layout_constraintEnd_toEndOf="@id/recipeNameTxt"
+        app:layout_constraintStart_toStartOf="@+id/recipeNameTxt">
+        <!--Like-->
+        <TextView
+            android:id="@+id/recipeLikeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_3mdp"
+            android:gravity="center"
+            android:textColor="@color/cyanBlueAzure"
+            android:textSize="@dimen/_9font_mdp"
+            app:drawableTint="@color/cyanBlueAzure"
+            app:drawableTopCompat="@drawable/ic_thumbs_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/recipeTimeTxt"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--Time-->
+        <TextView
+            android:id="@+id/recipeTimeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_3mdp"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/_9font_mdp"
+            app:drawableTint="@color/gray"
+            app:drawableTopCompat="@drawable/ic_clock"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/recipeVeganTxt"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/recipeLikeTxt"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--Vegan-->
+        <TextView
+            android:id="@+id/recipeVeganTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_3mdp"
+            android:gravity="center"
+            android:text="@string/vegan"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/_8font_mdp"
+            app:drawableTint="@color/gray"
+            app:drawableTopCompat="@drawable/ic_leaf"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/recipeHealthTxt"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/recipeTimeTxt"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--health-->
+        <TextView
+            android:id="@+id/recipeHealthTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_3mdp"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/_9font_mdp"
+            app:drawableTint="@color/gray"
+            app:drawableTopCompat="@drawable/ic_shield_heart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/recipeVeganTxt"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
