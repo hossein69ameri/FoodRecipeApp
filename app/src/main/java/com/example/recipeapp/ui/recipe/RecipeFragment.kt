@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.recipeapp.R
 import com.example.recipeapp.adapter.PopularAdapter
+import com.example.recipeapp.adapter.RecentAdapter
 import com.example.recipeapp.databinding.FragmentRecipeBinding
 import com.example.recipeapp.model.ResponseRecipes
 import com.example.recipeapp.util.NetworkRequest
@@ -31,6 +32,7 @@ class RecipeFragment : Fragment() {
     private val registerViewModel: RegisterViewModel by viewModels()
     private val viewModel: RecipeViewModel by viewModels()
     @Inject lateinit var popularAdapter: PopularAdapter
+    @Inject lateinit var recentAdapter: RecentAdapter
     private var autoScroll = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -44,11 +46,13 @@ class RecipeFragment : Fragment() {
         lifecycleScope.launchWhenCreated { showUsername() }
         //call api
         viewModel.callPopularApi(viewModel.popularQueries())
+        viewModel.callRecentApi(viewModel.recentQueries())
         //load data
         loadPopularData()
+        loadRecentData()
     }
 
-
+    //---Popular---//
     private fun loadPopularData() {
         viewModel.popularData.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -73,12 +77,6 @@ class RecipeFragment : Fragment() {
         }
     }
 
-    private fun setupLoading(isShownLoading: Boolean, shimmer: ShimmerRecyclerView) {
-        shimmer.apply {
-            if (isShownLoading) showShimmer() else hideShimmer()
-        }
-    }
-
     private fun initPopularRecycler() {
         val snapHelper = LinearSnapHelper()
         binding.popularList.setupRecyclerView(LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false), popularAdapter)
@@ -90,6 +88,39 @@ class RecipeFragment : Fragment() {
         }
     }
 
+    //---Recent---//
+    private fun loadRecentData() {
+        viewModel.recentData.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is NetworkRequest.Loading -> {
+                    setupLoading(true, binding.recipesList)
+                }
+                is NetworkRequest.Success -> {
+                    setupLoading(false, binding.recipesList)
+                    response.data?.let { data ->
+                        if (data.results!!.isNotEmpty()) {
+                            recentAdapter.setData(data.results)
+                            initRecentRecycler()
+                        }
+                    }
+                }
+                is NetworkRequest.Error -> {
+                    setupLoading(false, binding.recipesList)
+                    binding.root.showSnackBar(response.message!!)
+                }
+            }
+        }
+    }
+
+    private fun initRecentRecycler() {
+        binding.recipesList.setupRecyclerView(LinearLayoutManager(requireContext()), recentAdapter)
+        //click
+        recentAdapter.setOnItemClickListener {
+            //
+        }
+    }
+
+    //---Other---//
     private fun autoScrollPopular(list: List<ResponseRecipes.Result>) {
         lifecycleScope.launchWhenCreated {
             repeat(100) {
@@ -101,6 +132,12 @@ class RecipeFragment : Fragment() {
                 }
                 binding.popularList.smoothScrollToPosition(autoScroll)
             }
+        }
+    }
+
+    private fun setupLoading(isShownLoading: Boolean, shimmer: ShimmerRecyclerView) {
+        shimmer.apply {
+            if (isShownLoading) showShimmer() else hideShimmer()
         }
     }
 

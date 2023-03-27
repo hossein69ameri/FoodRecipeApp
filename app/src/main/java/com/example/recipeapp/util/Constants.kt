@@ -17,6 +17,7 @@ object Constants {
     const val DIET = "diet"
     const val QUERY = "query"
     const val LIMITED_COUNT = 10
+    const val FULL_COUNT = 50
 
     //APIS value
     const val POPULARITY = "popularity"
