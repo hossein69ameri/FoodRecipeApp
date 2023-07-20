@@ -1,9 +1,9 @@
 # FoodRecipeApp
-FoodRecipeApp is a sample Android project using [Spoonacular](https://api.spoonacular.com/) based on MVVM architecture. It showcases the latest Android tech stacks with well-designed architecture and best practices.
+FoodRecipeApp is a sample Android project using [Spoonacular](https://spoonacular.com/) based on MVVM architecture. It showcases the latest Android tech stacks with well-designed architecture and best practices.
 FoodRecipeApp is an app for adopting healthier habits and losing weight. In this clone app, you have access to add and manage your daily breakfast, lunch, dinner, and drink calorie data. Using this clone you can also cook or read multiple recipes with their ingredients, calories, time and all. You will find 20+ diet plans like Keto, Low Carb, Intermittent Fasting, Clean Eating, Bulk Up, Vegetarian, and more.
 
 # Screen Shot
-<img src="https://github.com/hossein69ameri/Blogs/assets/103646893/dac920cb-2fcc-4e2e-9a0f-16becd3ad19a" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="200" height="400" /> | <img src="https://github.com/hossein69ameri/FoodRecipeApp/assets/103646893/5397cf81-2420-4763-a1f1-9fb502a84d3d" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="200" height="400" /> | <img src="https://github.com/hossein69ameri/FoodRecipeApp/assets/103646893/11758a9e-4ccc-4b24-9423-186d39691063" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="200" height="400" /> | 
+<img src="https://github.com/hossein69ameri/Blogs/assets/103646893/dac920cb-2fcc-4e2e-9a0f-16becd3ad19a" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="200" height="400" /> | <img src="https://github.com/hossein69ameri/FoodRecipeApp/assets/103646893/29aaf1cf-b966-4eed-91e2-efc5167265c5" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="200" height="400" /> | <img src="https://github.com/hossein69ameri/FoodRecipeApp/assets/103646893/763192c6-ba3c-48ff-b482-40edce045b89" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="200" height="400" /> | 
 
 # Features
 100% Kotlin
