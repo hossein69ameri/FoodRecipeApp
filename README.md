@@ -31,7 +31,7 @@ Dependency injection
 
 [ViewModel](https://developer.android.com/reference/androidx/lifecycle/ViewModel)  - UI-related data holder, lifecycle aware.
 
-[Navigation component](https://developer.android.com/guide/navigation)  -  Fragment routing handler
+[Navigation component](https://developer.android.com/guide/navigation)  -  Fragment routing handler.
 
 [Coroutines](https://developer.android.com/kotlin/coroutines) - Concurrency design pattern for asynchronous programming.
 
