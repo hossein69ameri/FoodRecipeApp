@@ -41,7 +41,7 @@ Dependency injection
 
 [DiffUtil](https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil) - DiffUtil is a utility class that calculates the difference between two lists and outputs a list of update operations that converts the first list into the second one.
 
-[Room](https://developer.android.com/training/data-storage/room) - Save data in a local database using Room
+[Room](https://developer.android.com/training/data-storage/room) - Save data in a local database using Room.
 
 [Data Store](https://developer.android.com/topic/libraries/architecture/datastore) - Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers
 
