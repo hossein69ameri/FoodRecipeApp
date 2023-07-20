@@ -30,7 +30,7 @@ interface RecipeAppDao {
     @Query("SELECT EXISTS (SELECT 1 FROM ${Constants.DETAIL_TABLE_NAME} WHERE ID = :id)")
     fun existsDetail(id: Int): Flow<Boolean>
 
-    //Favorite
+    //Favorites
     @Insert(onConflict = REPLACE)
     suspend fun saveFavorite(entity: FavoriteEntity)
 
