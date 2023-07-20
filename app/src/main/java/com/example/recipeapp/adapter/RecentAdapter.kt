@@ -1,5 +1,10 @@
 package com.example.recipeapp.adapter
 
+import com.example.recipeapp.models.recipe.ResponseRecipes.Result
+import com.example.recipeapp.utils.BaseDiffUtils
+import com.example.recipeapp.utils.Constants
+import com.example.recipeapp.utils.minToHour
+import com.example.recipeapp.utils.setDynamicallyColor
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,17 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.request.CachePolicy
 import com.example.recipeapp.R
-import com.example.recipeapp.databinding.ItemPopularBinding
 import com.example.recipeapp.databinding.ItemRecipesBinding
-import com.example.recipeapp.model.ResponseRecipes
-import com.example.recipeapp.model.ResponseRecipes.Result
-import com.example.recipeapp.util.BaseDiffUtils
-import com.example.recipeapp.util.Constants
-import com.example.recipeapp.util.minToHour
-import com.example.recipeapp.util.setDynamicallyColor
 import javax.inject.Inject
 
 class RecentAdapter @Inject constructor() : RecyclerView.Adapter<RecentAdapter.ViewHolder>() {
+
     private lateinit var binding: ItemRecipesBinding
     private var items = emptyList<Result>()
     private lateinit var context: Context
@@ -32,15 +31,13 @@ class RecentAdapter @Inject constructor() : RecyclerView.Adapter<RecentAdapter.V
         return ViewHolder()
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(items[position])
 
     override fun getItemCount() = items.size
 
-    override fun getItemId(position: Int) = position.toLong()
-
     override fun getItemViewType(position: Int) = position
+
+    override fun getItemId(position: Int) = position.toLong()
 
     override fun onViewAttachedToWindow(holder: ViewHolder) {
         super.onViewAttachedToWindow(holder)
@@ -56,46 +53,45 @@ class RecentAdapter @Inject constructor() : RecyclerView.Adapter<RecentAdapter.V
         @SuppressLint("SetTextI18n")
         fun bind(item: Result) {
             binding.apply {
-                //text
+                //Text
                 recipeNameTxt.text = item.title
-                val htmlFormatter = HtmlCompat.fromHtml(item.summary!!,HtmlCompat.FROM_HTML_MODE_COMPACT)
+                val htmlFormatter = HtmlCompat.fromHtml(item.summary!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
                 recipeDescTxt.text = htmlFormatter
                 recipeLikeTxt.text = item.aggregateLikes.toString()
                 recipeTimeTxt.text = item.readyInMinutes!!.minToHour()
                 recipeHealthTxt.text = item.healthScore.toString()
-                //image
+                //Image
                 val imageSplit = item.image!!.split("-")
-                val imageSize =
-                    imageSplit[1].replace(Constants.OLD_IMAGE_SIZE, Constants.NEW_IMAGE_SIZE)
+                val imageSize = imageSplit[1].replace(Constants.OLD_IMAGE_SIZE, Constants.NEW_IMAGE_SIZE)
                 recipeImg.load("${imageSplit[0]}-$imageSize") {
                     crossfade(true)
                     crossfade(800)
                     memoryCachePolicy(CachePolicy.ENABLED)
                     error(R.drawable.ic_placeholder)
                 }
-                //vegan
-                if (item.vegan!!){
+                //Vegan
+                if (item.vegan!!) {
                     recipeVeganTxt.setDynamicallyColor(R.color.caribbean_green)
-                }else {
+                } else {
                     recipeVeganTxt.setDynamicallyColor(R.color.gray)
                 }
-                //healthy
-                when(item.healthScore){
+                //Healthy
+                when (item.healthScore) {
                     in 90..100 -> recipeHealthTxt.setDynamicallyColor(R.color.caribbean_green)
                     in 60..89 -> recipeHealthTxt.setDynamicallyColor(R.color.chineseYellow)
                     in 0..59 -> recipeHealthTxt.setDynamicallyColor(R.color.tart_orange)
                 }
-                //click
+                //Click
                 root.setOnClickListener {
-                    onItemClickListener?.let {
-                        it(item.id!!)
-                    }
+                    onItemClickListener?.let { it(item.id!!) }
                 }
             }
         }
-        fun initAnimation(){
-            binding.root.animation = AnimationUtils.loadAnimation(context,R.anim.item_anim)
+
+        fun initAnimation() {
+            binding.root.animation = AnimationUtils.loadAnimation(context, R.anim.item_anim)
         }
+
         fun clearAnimation() {
             binding.root.clearAnimation()
         }
@@ -108,10 +104,9 @@ class RecentAdapter @Inject constructor() : RecyclerView.Adapter<RecentAdapter.V
     }
 
     fun setData(data: List<Result>) {
-        val adapterDiffUtil = BaseDiffUtils(items, data)
-        val diffUtils = DiffUtil.calculateDiff(adapterDiffUtil)
+        val adapterDiffUtils = BaseDiffUtils(items, data)
+        val diffUtils = DiffUtil.calculateDiff(adapterDiffUtils)
         items = data
         diffUtils.dispatchUpdatesTo(this)
     }
-
 }

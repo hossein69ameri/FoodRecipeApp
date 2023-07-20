@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.steps.StepsFragment">
+    <!--Steps-->
+    <TextView
+        android:id="@+id/stepsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10mdp"
+        android:drawablePadding="@dimen/_5mdp"
+        android:gravity="center_vertical"
+        android:text="@string/steps"
+        android:textColor="@color/jacarta"
+        android:textSize="@dimen/_10font_mdp"
+        app:drawableStartCompat="@drawable/ic_bowl_chopsticks_noodles"
+        app:drawableTint="@color/jacarta"
+        app:fontPath="fonts/atlas_bold.ttf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--List-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/stepsList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:layout_marginEnd="@dimen/_10mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/stepsTitle"
+        app:layout_constraintTop_toBottomOf="@id/stepsTitle"
+        tools:ignore="RtlSymmetry" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

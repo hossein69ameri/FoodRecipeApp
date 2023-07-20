@@ -1,5 +1,8 @@
 package com.example.recipeapp.adapter
 
+import com.example.recipeapp.models.recipe.ResponseRecipes.Result
+import com.example.recipeapp.utils.BaseDiffUtils
+import com.example.recipeapp.utils.Constants
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,13 +12,10 @@ import coil.load
 import coil.request.CachePolicy
 import com.example.recipeapp.R
 import com.example.recipeapp.databinding.ItemPopularBinding
-import com.example.recipeapp.model.ResponseRecipes
-import com.example.recipeapp.model.ResponseRecipes.Result
-import com.example.recipeapp.util.BaseDiffUtils
-import com.example.recipeapp.util.Constants
 import javax.inject.Inject
 
 class PopularAdapter @Inject constructor() : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
+
     private lateinit var binding: ItemPopularBinding
     private var items = emptyList<Result>()
 
@@ -24,38 +24,33 @@ class PopularAdapter @Inject constructor() : RecyclerView.Adapter<PopularAdapter
         return ViewHolder()
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(items[position])
 
     override fun getItemCount() = items.size
 
-    override fun getItemId(position: Int) = position.toLong()
-
     override fun getItemViewType(position: Int) = position
+
+    override fun getItemId(position: Int) = position.toLong()
 
     inner class ViewHolder : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(item: Result) {
             binding.apply {
-                //text
+                //Text
                 popularNameTxt.text = item.title
                 popularPriceTxt.text = "${item.pricePerServing} $"
-                //image
+                //Image
                 val imageSplit = item.image!!.split("-")
-                val imageSize =
-                    imageSplit[1].replace(Constants.OLD_IMAGE_SIZE, Constants.NEW_IMAGE_SIZE)
+                val imageSize = imageSplit[1].replace(Constants.OLD_IMAGE_SIZE, Constants.NEW_IMAGE_SIZE)
                 popularImg.load("${imageSplit[0]}-$imageSize") {
                     crossfade(true)
                     crossfade(800)
                     memoryCachePolicy(CachePolicy.ENABLED)
                     error(R.drawable.ic_placeholder)
                 }
-                //click
+                //Click
                 root.setOnClickListener {
-                    onItemClickListener?.let {
-                        it(item.id!!)
-                    }
+                    onItemClickListener?.let { it(item.id!!) }
                 }
             }
         }
@@ -68,10 +63,9 @@ class PopularAdapter @Inject constructor() : RecyclerView.Adapter<PopularAdapter
     }
 
     fun setData(data: List<Result>) {
-        val adapterDiffUtil = BaseDiffUtils(items, data)
-        val diffUtils = DiffUtil.calculateDiff(adapterDiffUtil)
+        val adapterDiffUtils = BaseDiffUtils(items, data)
+        val diffUtils = DiffUtil.calculateDiff(adapterDiffUtils)
         items = data
         diffUtils.dispatchUpdatesTo(this)
     }
-
 }

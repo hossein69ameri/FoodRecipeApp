@@ -1,6 +1,6 @@
 package com.example.recipeapp.di
 
-import com.example.recipeapp.model.BodyRegister
+import com.example.recipeapp.models.register.BodyRegister
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,5 +11,5 @@ import dagger.hilt.android.components.FragmentComponent
 object BodyModule {
 
     @Provides
-    fun bodyProvides() = BodyRegister()
+    fun bodyRegister() = BodyRegister()
 }

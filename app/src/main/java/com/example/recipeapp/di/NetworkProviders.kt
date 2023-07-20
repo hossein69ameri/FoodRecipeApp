@@ -1,8 +1,8 @@
 package com.example.recipeapp.di
 
 import com.example.recipeapp.data.network.ApiServices
-import com.example.recipeapp.util.Constants.BASE_URL
-import com.example.recipeapp.util.Constants.CONNECTION_TIME
+import com.example.recipeapp.utils.Constants.BASE_URL
+import com.example.recipeapp.utils.Constants.CONNECTION_TIME
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

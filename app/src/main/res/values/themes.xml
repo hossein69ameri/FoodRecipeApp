@@ -1,13 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.RecipeApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.KotlinArchitecture" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/jacarta</item>
         <item name="colorPrimaryVariant">@color/dark_gunmetal</item>
         <item name="colorOnPrimary">@color/pastel_pink</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
     </style>
     <!--TextInputLayout-->
     <style name="DarkGreenTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -31,4 +30,31 @@
         <item name="android:insetBottom">0dp</item>
         <item name="android:textSize">@dimen/_14font_mdp</item>
     </style>
+    <!--Chip group-->
+    <style name="DarkChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/item_chip_background</item>
+    </style>
+    <style name="DietsChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/whiteSmoke</item>
+        <item name="android:clickable">false</item>
+        <item name="android:checkable">false</item>
+    </style>
+    <!--Progressbar-->
+    <style name="DarkProgressbar">
+        <item name="colorAccent">@color/jacarta</item>
+    </style>
+    <!--Icon text-->
+    <style name="IconTextView">
+        <item name="android:drawablePadding">@dimen/_3mdp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="drawableTint">@color/gray</item>
+        <item name="android:textSize">@dimen/_8font_mdp</item>
+    </style>
+    <!--Shape imageview-->
+    <style name="RoundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_8mdp</item>
+    </style>
+
 </resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/titleTxt"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:alpha="1"
+            android:elevation="@dimen/_2mdp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/searchEdt"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50mdp"
+            android:layout_marginStart="@dimen/_20mdp"
+            android:layout_marginTop="@dimen/_20mdp"
+            android:layout_marginEnd="@dimen/_20mdp"
+            android:elevation="0dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/titleTxt" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/titleTxt"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:alpha="0"
+            android:elevation="0dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/searchEdt"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_60mdp"
+            android:layout_marginStart="@dimen/mines5mdp"
+            android:layout_marginTop="@dimen/mines5mdp"
+            android:layout_marginEnd="@dimen/mines5mdp"
+            android:elevation="@dimen/_15mdp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+</MotionScene>

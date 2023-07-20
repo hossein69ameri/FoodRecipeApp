@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/_10mdp"
+    tools:context=".ui.menu.MenuFragment">
+    <!--Meal type-->
+    <TextView
+        android:id="@+id/mealTypeTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10mdp"
+        android:text="@string/meal_types"
+        android:textColor="@color/jacarta"
+        android:textSize="@dimen/_12font_mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--Meal chips-->
+    <HorizontalScrollView
+        android:id="@+id/mealChipsScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3mdp"
+        android:clipToPadding="false"
+        android:fadingEdge="horizontal"
+        android:requiresFadingEdge="horizontal"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/mealTypeTitle">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/mealChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_10mdp"
+            app:chipSpacing="0dp"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true" />
+    </HorizontalScrollView>
+    <!--Diets type-->
+    <TextView
+        android:id="@+id/dietTypeTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20mdp"
+        android:text="@string/diet_types"
+        android:textColor="@color/jacarta"
+        android:textSize="@dimen/_12font_mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/mealTypeTitle"
+        app:layout_constraintTop_toBottomOf="@id/mealChipsScroll" />
+    <!--Meal chips-->
+    <HorizontalScrollView
+        android:id="@+id/dietChipsScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3mdp"
+        android:clipToPadding="false"
+        android:fadingEdge="horizontal"
+        android:requiresFadingEdge="horizontal"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/dietTypeTitle">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/dietChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_10mdp"
+            app:chipSpacing="0dp"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true" />
+    </HorizontalScrollView>
+    <!--Submit-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submitBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10mdp"
+        android:layout_marginTop="@dimen/_20mdp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/submit"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12font_mdp"
+        app:backgroundTint="@color/persianGreen"
+        app:cornerRadius="@dimen/_8mdp"
+        app:layout_constraintTop_toBottomOf="@id/dietChipsScroll" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

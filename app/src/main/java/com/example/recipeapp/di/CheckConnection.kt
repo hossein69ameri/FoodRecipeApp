@@ -16,7 +16,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object CheckConnection {
 
-
     @Provides
     @Singleton
     fun provideCM(@ApplicationContext context: Context) =
@@ -35,5 +34,4 @@ object CheckConnection {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
             addCapability(NetworkCapabilities.NET_CAPABILITY_FOREGROUND)
     }.build()
-
 }

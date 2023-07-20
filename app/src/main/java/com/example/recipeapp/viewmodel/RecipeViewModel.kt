@@ -1,58 +1,103 @@
 package com.example.recipeapp.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.example.recipeapp.data.database.entity.RecipeEntity
+import com.example.recipeapp.data.repository.MenuRepository
 import com.example.recipeapp.data.repository.RecipeRepository
-import com.example.recipeapp.model.ResponseRecipes
-import com.example.recipeapp.util.Constants
-import com.example.recipeapp.util.NetworkRequest
-import com.example.recipeapp.util.NetworkResponse
+import com.example.recipeapp.models.recipe.ResponseRecipes
+import com.example.recipeapp.utils.Constants
+import com.example.recipeapp.utils.NetworkRequest
+import com.example.recipeapp.utils.NetworkResponse
+import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class RecipeViewModel @Inject constructor(private val repository: RecipeRepository) : ViewModel() {
+class RecipeViewModel @Inject constructor(
+    private val repository: RecipeRepository,
+    private val menuRepository: MenuRepository
+) : ViewModel() {
 
     //---Popular---//
-    //queries
+    //Queries
     fun popularQueries(): HashMap<String, String> {
         val queries: HashMap<String, String> = HashMap()
-        queries[Constants.API_KEY] = Constants.SITE_API_KEY
+        queries[Constants.API_KEY] = Constants.MY_API_KEY
         queries[Constants.SORT] = Constants.POPULARITY
         queries[Constants.NUMBER] = Constants.LIMITED_COUNT.toString()
         queries[Constants.ADD_RECIPE_INFORMATION] = Constants.TRUE
         return queries
     }
 
-    //popular
+    //Api
     val popularData = MutableLiveData<NetworkRequest<ResponseRecipes>>()
-    fun callPopularApi(queries : Map<String,String>) = viewModelScope.launch {
+    fun callPopularApi(queries: Map<String, String>) = viewModelScope.launch {
         popularData.value = NetworkRequest.Loading()
         val response = repository.remote.getRecipes(queries)
         popularData.value = NetworkResponse(response).generalNetworkResponse()
+        //Cache
+        val cache = popularData.value?.data
+        if (cache != null)
+            offlinePopular(cache)
+    }
+
+    //Local
+    private fun savePopular(entity: RecipeEntity) = viewModelScope.launch(Dispatchers.IO) {
+        repository.local.saveRecipes(entity)
+    }
+
+    val readPopularFromDb = repository.local.loadRecipes().asLiveData()
+
+    private fun offlinePopular(response: ResponseRecipes) {
+        val entity = RecipeEntity(0, response)
+        savePopular(entity)
     }
 
     //---Recent---//
-    //queries
+    //Queries
+    private var mealType = Constants.MAIN_COURSE
+    private var dietType = Constants.GLUTEN_FREE
+
     fun recentQueries(): HashMap<String, String> {
+        viewModelScope.launch {
+            menuRepository.readMenuData.collect {
+                mealType = it.meal
+                dietType = it.diet
+            }
+        }
         val queries: HashMap<String, String> = HashMap()
-        queries[Constants.API_KEY] = Constants.SITE_API_KEY
-        queries[Constants.TYPE] = Constants.MAIN_COURSE
-        queries[Constants.DIET] = Constants.GLUTEN_FREE
+        queries[Constants.API_KEY] = Constants.MY_API_KEY
+        queries[Constants.TYPE] = mealType
+        queries[Constants.DIET] = dietType
         queries[Constants.NUMBER] = Constants.FULL_COUNT.toString()
         queries[Constants.ADD_RECIPE_INFORMATION] = Constants.TRUE
         return queries
     }
 
-    //popular
+    //Api
     val recentData = MutableLiveData<NetworkRequest<ResponseRecipes>>()
-    fun callRecentApi(queries : Map<String,String>) = viewModelScope.launch {
+    fun callRecentApi(queries: Map<String, String>) = viewModelScope.launch {
         recentData.value = NetworkRequest.Loading()
         val response = repository.remote.getRecipes(queries)
         recentData.value = recentNetworkResponse(response)
+        //Cache
+        val cache = recentData.value?.data
+        if (cache != null)
+            offlineRecent(cache)
+    }
+
+    //Local
+    private fun saveRecent(entity: RecipeEntity) = viewModelScope.launch(Dispatchers.IO) {
+        repository.local.saveRecipes(entity)
+    }
+
+    val readRecentFromDb = repository.local.loadRecipes().asLiveData()
+
+    private fun offlineRecent(response: ResponseRecipes) {
+        val entity = RecipeEntity(1, response)
+        saveRecent(entity)
     }
 
     private fun recentNetworkResponse(response: Response<ResponseRecipes>): NetworkRequest<ResponseRecipes> {
@@ -62,11 +107,10 @@ class RecipeViewModel @Inject constructor(private val repository: RecipeReposito
             response.code() == 402 -> NetworkRequest.Error("Your free plan finished")
             response.code() == 422 -> NetworkRequest.Error("Api key not found!")
             response.code() == 500 -> NetworkRequest.Error("Try again")
+            response.body()!!.results.isNullOrEmpty() -> NetworkRequest.Error("Not found any recipe!")
             response.isSuccessful -> NetworkRequest.Success(response.body()!!)
-            response.body()!!.results.isNullOrEmpty() -> NetworkRequest.Error("Not Found any Recipe!")
             else -> NetworkRequest.Error(response.message())
         }
     }
-
 
 }
