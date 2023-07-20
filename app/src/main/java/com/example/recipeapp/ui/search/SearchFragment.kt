@@ -48,30 +48,33 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //InitViews
-        binding.apply {
-            //Keyboard listener
-            requireActivity().window.decorView.viewTreeObserver.addOnGlobalLayoutListener {
-                val rect = Rect()
-                requireActivity().window.decorView.getWindowVisibleDisplayFrame(rect)
-                val height = requireActivity().window.decorView.height
-                if (height - rect.bottom <= height * 0.1399)
-                    rootMotion.transitionToStart()
-                else
-                    rootMotion.transitionToEnd()
-            }
-            //Check internet
-            lifecycleScope.launchWhenStarted {
-                networkChecker.checkNetworkAvailability().collect { state ->
-                    initInternetLayout(state)
-                    isNetworkAvailable = state
+            binding.apply {
+                //Keyboard listener
+                activity?.window?.decorView?.viewTreeObserver?.addOnGlobalLayoutListener {
+                    val rect = Rect()
+                    activity?.window?.decorView?.getWindowVisibleDisplayFrame(rect)
+                    val height = activity?.window?.decorView?.height
+                    if (height != null) {
+                        if (height - rect.bottom <= height * 0.1399)
+                            rootMotion.transitionToStart()
+                        else
+                            rootMotion.transitionToEnd()
+                    }
+                }
+                //Check internet
+                lifecycleScope.launchWhenStarted {
+                    networkChecker.checkNetworkAvailability().collect { state ->
+                        initInternetLayout(state)
+                        isNetworkAvailable = state
+                    }
+                }
+                //Search
+                searchEdt.addTextChangedListener {
+                    if (it.toString().length > 2 && isNetworkAvailable)
+                        viewModel.callSearchApi(viewModel.searchQueries(it.toString()))
                 }
             }
-            //Search
-            searchEdt.addTextChangedListener {
-                if (it.toString().length>2 && isNetworkAvailable)
-                    viewModel.callSearchApi(viewModel.searchQueries(it.toString()))
-            }
-        }
+
         //Show data
         loadRecentData()
     }
